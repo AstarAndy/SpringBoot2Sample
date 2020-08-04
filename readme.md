@@ -1,7 +1,11 @@
 # SpringStarter2
 
 ## Description
-	This project is a simple Spring-Boot2 app (version 2.3.1.RELEASE) and is intended to demonstrate various aspects of Spring Boot
+This project is a simple Spring-Boot2 app (version 2.3.1.RELEASE) and is intended to demonstrate various aspects of Spring Boot.  This is to
+include some key concepts:
+1. TDD
+2. TDD **without** loading the Spring-Context
+3. Unit, not integration, testing
 
 
 # Warning
