@@ -17,3 +17,18 @@ You can do this by
 1. If you are running from the command-line add **--Dspring.profiles.active=test (or local)**
 2. In Eclipse or Intellj add **-Dspring.profiles.active=test (or local)** into your run config
 
+## Error when customizig RestTemplate for timeouts
+
+The following error happened during application startup due to a `@Configuration` item that customizes te `RestTemplate` bean.  It looks like
+```java
+Factory method 'restTemplate' threw exception; nested exception is java.lang.NoClassDefFoundError: org/apache/http/impl/client/HttpClients
+```
+As it turns out a dependency for HttpClient classes must be added to the POM manually to deal with this.
+```xml
+<dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpclient</artifactId>
+    <version>4.5.2</version>
+</dependency>
+```
+This takes care of the class-not-found issue.
