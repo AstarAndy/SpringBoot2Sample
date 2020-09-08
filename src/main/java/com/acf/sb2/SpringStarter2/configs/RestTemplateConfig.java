@@ -15,15 +15,8 @@ public class RestTemplateConfig {
 
 	@Value( "${rest.config.read.timeout}" )
 	private int readTimeout;
-	
-	@Bean
-	public RestTemplate restTemplate() {
-		ClientHttpRequestFactory httpFactory = getClientHttpRequestFactory();
-		return new RestTemplate(httpFactory);	
-	}
-	
 	 
-	private ClientHttpRequestFactory getClientHttpRequestFactory() {
+	public ClientHttpRequestFactory getClientHttpRequestFactory() {
 	    HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
 	    
 	    clientHttpRequestFactory.setConnectTimeout(connTimeout);
