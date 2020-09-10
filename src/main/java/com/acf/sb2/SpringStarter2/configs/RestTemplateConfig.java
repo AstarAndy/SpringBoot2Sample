@@ -1,6 +1,9 @@
 package com.acf.sb2.SpringStarter2.configs;
 
+import java.time.Duration;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -11,17 +14,29 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateConfig {
 
 	@Value( "${rest.config.connection.timeout}" )
-	private int connTimeout;
+	private long connTimeout;
 
 	@Value( "${rest.config.read.timeout}" )
-	private int readTimeout;
+	private long readTimeout;
 	 
-	public ClientHttpRequestFactory getClientHttpRequestFactory() {
+/*
+ *	Legacy way of setting timeouts on RestTemplate
+	private ClientHttpRequestFactory getClientHttpRequestFactory() {
 	    HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
 	    
 	    clientHttpRequestFactory.setConnectTimeout(connTimeout);
 	    clientHttpRequestFactory.setReadTimeout(readTimeout);
 	    
 	    return clientHttpRequestFactory;
+	}
+*/
+	
+	@Bean
+	RestTemplate restTemplateWithTimeout() {
+		return
+			    new RestTemplateBuilder()
+			        .setConnectTimeout(Duration.ofMillis(connTimeout))
+			        .setReadTimeout(Duration.ofMillis(connTimeout))
+			        .build();
 	}
 }
